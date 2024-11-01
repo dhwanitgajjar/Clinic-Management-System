@@ -16,6 +16,9 @@ public class ClinicManagerController {
     private TextArea output;
 
     @FXML
+    private TextField fname, lname;
+
+    @FXML
     TableView tbl_location;
 
     @FXML
@@ -28,7 +31,7 @@ public class ClinicManagerController {
     private TabPane tabs;
 
     @FXML
-    private Tab tab1, tab2, tab3;
+    private Tab tab1, tab2;
 
     /**
      * This method will be performed automatically after the fxml is loaded.
@@ -65,5 +68,13 @@ public class ClinicManagerController {
         output.appendText("skibbidy toilet\n");
     }
 
+    @FXML
+    protected void setFirstName() {
+        output.appendText(fname.getText());
+    }
 
+    @FXML
+    protected void setLastName() {
+        output.appendText(lname.getText());
+    }
 }
