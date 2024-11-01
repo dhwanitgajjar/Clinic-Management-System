@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.cs213_project3.ClinicManagerController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="definitely don't click this button..." onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs213_project3.ClinicManagerController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to RUClinic!">
+      <font>
+         <Font name="Microsoft JhengHei Light" size="24.0" />
+      </font>
+   </Text>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-Select a Command Below-">
+      <font>
+         <Font name="Microsoft JhengHei Light" size="12.0" />
+      </font>
+   </Text>
+   <ChoiceBox prefWidth="150.0" />
+   <Accordion />
+   <Button mnemonicParsing="false" onAction="#skibidy_toilet" text="skibidy toilet">
+      <font>
+         <Font name="Papyrus" size="14.0" />
+      </font>
+   </Button>
+
+    <Label fx:id="welcomeText" />
+    <Button onAction="#onHelloButtonClick" text="definitely don't click this button..." />
+   <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" />
 </VBox>

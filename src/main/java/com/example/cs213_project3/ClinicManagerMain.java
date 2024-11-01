@@ -10,8 +10,12 @@ import java.io.IOException;
 public class ClinicManagerMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        //load fxml file
         FXMLLoader fxmlLoader = new FXMLLoader(ClinicManagerMain.class.getResource("clinic-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        //create a scene object
+        //fxmlLoader.load() returns a Parent node (root node of the Scene-Graph)
+        Scene scene = new Scene(fxmlLoader.load(), 810, 630); //width, height
+        //configure and display scene
         stage.setTitle("RU Clinic Scheduler");
         stage.setScene(scene);
         stage.show();
