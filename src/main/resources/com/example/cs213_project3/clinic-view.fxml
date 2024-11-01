@@ -5,7 +5,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -14,6 +19,17 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <TabPane fx:id="tabs" prefHeight="190.0" prefWidth="236.0" tabClosingPolicy="UNAVAILABLE">
+     <tabs>
+       <Tab fx:id="tab1" text="Schedule" />
+       <Tab fx:id="tab2" text="Reschedule/Cancel" />
+         <Tab fx:id="tab3" text="List Appointments">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+           </content>
+         </Tab>
+     </tabs>
+   </TabPane>
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to RUClinic!">
       <font>
          <Font name="Microsoft JhengHei Light" size="24.0" />
@@ -24,13 +40,20 @@
          <Font name="Microsoft JhengHei Light" size="12.0" />
       </font>
    </Text>
-   <ChoiceBox prefWidth="150.0" />
+   <ChoiceBox fx:id="test" prefWidth="150.0" />
+   <ChoiceBox fx:id="timeslots" prefWidth="150.0" />
    <Accordion />
    <Button mnemonicParsing="false" onAction="#skibidy_toilet" text="skibidy toilet">
       <font>
          <Font name="Papyrus" size="14.0" />
       </font>
    </Button>
+   <TableView fx:id="tbl_location" prefHeight="200.0" prefWidth="200.0">
+     <columns>
+       <TableColumn fx:id="col_zip" prefWidth="75.0" text="zip" />
+       <TableColumn fx:id="col_county" prefWidth="75.0" text="county" />
+     </columns>
+   </TableView>
 
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="definitely don't click this button..." />
