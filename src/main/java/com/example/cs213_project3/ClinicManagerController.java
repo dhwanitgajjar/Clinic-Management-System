@@ -61,9 +61,6 @@ public class ClinicManagerController {
             fname_cancel, lname_cancel;
 
     @FXML
-    private TableView appt_table, billing_table, credits_table;
-
-    @FXML
     private Button loadedProviders;
 
     @FXML
@@ -83,9 +80,6 @@ public class ClinicManagerController {
             canceling_date, canceling_dob;
 
     @FXML
-    private TableColumn<Location, String> col_zip, col_county;
-
-    @FXML
     private RadioButton selectOffice, selectImaging;
 
     @FXML
@@ -95,7 +89,7 @@ public class ClinicManagerController {
     private TabPane tabs;
 
     @FXML
-    private Tab schedule_tab, change_tab, appointments_tab, billing_tab, credits_tab;
+    private Tab schedule_tab, reschedule_tab, cancel_tab, appointments_tab, billing_tab, credits_tab;
 
     /**
      * This method will be performed automatically after the fxml is loaded.
@@ -283,6 +277,19 @@ public class ClinicManagerController {
         return null;
     }
 
+    private Patient findPatientForCancelation(Profile patientProfile) {
+        Iterator<Patient> iterator = patients.iterator();
+        Patient curr = null;
+
+        while (iterator.hasNext()) {
+            curr = iterator.next();
+            if (curr.getProfile().equals(patientProfile)) {
+                return curr;
+            }
+        }
+
+        return null;
+    }
     
     /**
      * Cancels an appointment given the tokenized input.
@@ -316,7 +323,7 @@ public class ClinicManagerController {
             " " + appointment.getTimeslot().toString() + 
             " " + appointment.getPatient().toString() + " - appointment has been canceled.\n");
 
-            Patient patient = (Patient) appointment.getPatient();
+            Patient patient = findPatientForCancelation(appointment.getPatient().getProfile());
             patient.removeVisit(appointment);
         } else {
             output.appendText(canceling_date.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) +
