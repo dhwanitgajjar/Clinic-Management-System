@@ -162,7 +162,6 @@ public class List<E> implements Iterable<E> {
 	 * If the index is out of range, the method does nothing.
 	 * 
 	 * @param index index of the element to replace
-	 * @param element element to be stored at the specified position
 	 */
 	public void set(int index, E e) {
 

@@ -42,6 +42,9 @@ public class Doctor extends Provider {
      */
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+
         return super.equals(obj) && 
             this.specialty.equals(((Doctor) obj).specialty) && 
             this.npi.equals(((Doctor) obj).npi);

@@ -1,99 +1,387 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="810.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs213_project3.ClinicManagerController">
-  <tabs>
-    <Tab text="Schedule an Appointment">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="510.0" prefWidth="810.0">
-               <children>
-                  <GridPane layoutX="200.0" layoutY="141.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="215.0" prefWidth="600.0" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.4000244140625" minWidth="10.0" prefWidth="311.4000244140625" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="498.5999755859375" minWidth="10.0" prefWidth="498.5999755859375" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs213_project3.ClinicManagerController">
+   <center>
+      <TabPane prefHeight="448.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Schedule ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="810.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <GridPane prefHeight="365.0" prefWidth="810.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.60003662109375" minWidth="10.0" prefWidth="273.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="537.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="151.59998931884766" minHeight="10.0" prefHeight="129.60000610351562" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="176.79998168945312" minHeight="10.0" prefHeight="174.40001831054687" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="96.80000000000001" minHeight="10.0" prefHeight="59.999981689453136" vgrow="SOMETIMES" />
+                          </rowConstraints>
                            <children>
-                              <Button layoutX="53.0" layoutY="73.0" mnemonicParsing="false" onAction="#onHelloButtonClick" prefHeight="26.0" prefWidth="94.0" text="teri fudhi" />
-                              <RadioButton layoutX="56.0" layoutY="5.0" mnemonicParsing="false" text="RadioButton" />
-                              <Button layoutX="224.0" layoutY="47.0" mnemonicParsing="false" onAction="#skibidy_toilet" prefHeight="26.0" prefWidth="244.0" text="skibidy" />
-                              <Label fx:id="welcomeText" layoutX="86.0" layoutY="39.0" />
+                              <AnchorPane prefHeight="128.0" prefWidth="538.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <VBox fillWidth="false" prefHeight="200.0" prefWidth="537.6" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="fname_schedule" prefHeight="26.0" prefWidth="266.0" promptText="Patient First Name" />
+                                          <TextField fx:id="lname_schedule" prefHeight="26.0" prefWidth="266.0" promptText="Patient Last Name" />
+                                          <DatePicker fx:id="scheduling_dob" prefHeight="26.0" prefWidth="218.0" promptText="Patient Date of Birth" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="537.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox prefHeight="60.0" prefWidth="538.0" spacing="10.0">
+                                             <children>
+                                                <DatePicker fx:id="scheduling_date" prefHeight="26.0" prefWidth="218.0" promptText="Appointment Date" />
+                                                <ComboBox fx:id="scheduling_timeslot" prefWidth="150.0" promptText="Timeslot" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox prefHeight="49.0" prefWidth="538.0" spacing="10.0">
+                                             <children>
+                                                <Label text="Appointment Type:" />
+                                                <RadioButton fx:id="selectOffice" mnemonicParsing="false" onAction="#getAppointmentType" text="Office Visit">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="appointmentType" />
+                                                   </toggleGroup></RadioButton>
+                                                <RadioButton fx:id="selectImaging" mnemonicParsing="false" onAction="#getAppointmentType" text="Imaging " toggleGroup="$appointmentType" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox prefHeight="74.0" prefWidth="538.0" spacing="10.0">
+                                             <children>
+                                                <ComboBox fx:id="doctors_list" prefWidth="150.0" promptText="Provider" />
+                                                <ComboBox fx:id="imaging_service" prefWidth="150.0" promptText="Imaging Service" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="59.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Patient Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Text layoutX="33.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Appointment Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button fx:id="loadedProviders" layoutX="147.0" layoutY="25.0" mnemonicParsing="false" onAction="#loadProviders" prefHeight="26.0" prefWidth="115.0" text="Load Providers" />
+                                    <Button layoutX="278.0" layoutY="25.0" mnemonicParsing="false" onAction="#scheduleAppointment" prefHeight="26.0" prefWidth="115.0" text="Schedule" />
+                                    <Button layoutX="408.0" layoutY="25.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="115.0" text="Clear" />
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <ChoiceBox fx:id="timeslots" layoutX="197.0" layoutY="68.0" prefWidth="150.0" />
-                              <DatePicker layoutX="197.0" layoutY="14.0" prefHeight="26.0" prefWidth="245.0" promptText="Appointment Date" />
-                              <ChoiceBox fx:id="test" layoutX="24.0" layoutY="47.0" prefWidth="150.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <children>
-                              <TextField fx:id="fname" layoutX="70.0" layoutY="14.0" onAction="#setFirstName" prefHeight="26.0" prefWidth="179.0" promptText="First Name" />
-                              <TextField fx:id="lname" layoutX="71.0" layoutY="59.0" onAction="#setLastName" prefHeight="26.0" prefWidth="178.0" promptText="Last Name" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                           <children>
-                              <Text layoutX="88.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment Information" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Text layoutX="105.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Information" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                           <children>
-                              <TableView fx:id="tbl_location" layoutX="33.0" layoutY="-50.0" prefHeight="150.4" prefWidth="312.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TableColumn fx:id="col_zip" prefWidth="75.0" text="C1" />
-                                  <TableColumn fx:id="col_county" prefWidth="75.0" text="C2" />
-                                </columns>
-                              </TableView>
-                           </children></AnchorPane>
+                        </GridPane>
                      </children>
-                  </GridPane>
-                  <TextArea fx:id="output" layoutX="11.0" layoutY="447.0" prefHeight="115.0" prefWidth="787.0" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Cancel or Reschedule an Appointment">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-      <Tab text="View Appointments">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-      <Tab text="View Billing Statement">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-  </tabs>
-</TabPane>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Reschedule ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="365.0" prefWidth="810.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.60003662109375" minWidth="10.0" prefWidth="273.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="537.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="151.59998931884766" minHeight="10.0" prefHeight="129.60000610351562" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="176.79998168945312" minHeight="10.0" prefHeight="174.40001831054687" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="96.80000000000001" minHeight="10.0" prefHeight="59.999981689453136" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="128.0" prefWidth="538.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <VBox fillWidth="false" prefHeight="200.0" prefWidth="537.6" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="fname_reschedule" prefHeight="26.0" prefWidth="266.0" promptText="Patient First Name" />
+                                          <TextField fx:id="lname_reschedule" prefHeight="26.0" prefWidth="266.0" promptText="Patient Last Name" />
+                                          <DatePicker fx:id="rescheduling_dob" prefHeight="26.0" prefWidth="218.0" promptText="Patient Date of Birth" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="538.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox prefHeight="60.0" prefWidth="538.0" spacing="10.0">
+                                             <children>
+                                                <DatePicker fx:id="rescheduling_date" prefHeight="26.0" prefWidth="218.0" promptText="Appointment Date" />
+                                                <ComboBox fx:id="old_timeslot" prefWidth="150.0" promptText="Old Timeslot" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox prefHeight="74.0" prefWidth="538.0" spacing="10.0">
+                                             <children>
+                                                <ComboBox fx:id="new_timeslot" prefWidth="150.0" promptText="New Timeslot" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="59.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Patient Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Text layoutX="33.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Appointment Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button layoutX="278.0" layoutY="25.0" mnemonicParsing="false" onAction="#rescheduleAppointment" prefHeight="26.0" prefWidth="115.0" text="Reschedule" />
+                                    <Button layoutX="408.0" layoutY="25.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="115.0" text="Clear" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Cancel">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="365.0" prefWidth="810.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.60003662109375" minWidth="10.0" prefWidth="273.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="537.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="151.59998931884766" minHeight="10.0" prefHeight="129.60000610351562" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="176.79998168945312" minHeight="10.0" prefHeight="174.40001831054687" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="96.80000000000001" minHeight="10.0" prefHeight="59.999981689453136" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="128.0" prefWidth="538.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <VBox fillWidth="false" prefHeight="200.0" prefWidth="537.6" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="fname_cancel" prefHeight="26.0" prefWidth="266.0" promptText="Patient First Name" />
+                                          <TextField fx:id="lname_cancel" prefHeight="26.0" prefWidth="266.0" promptText="Patient Last Name" />
+                                          <DatePicker fx:id="canceling_dob" prefHeight="26.0" prefWidth="218.0" promptText="Patient Date of Birth" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="538.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox prefHeight="60.0" prefWidth="538.0" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox prefHeight="74.0" prefWidth="538.0" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <DatePicker fx:id="canceling_date" prefHeight="26.0" prefWidth="218.0" promptText="Appointment Date" />
+                                                <ComboBox fx:id="canceling_timeslot" prefWidth="150.0" promptText="Timeslot" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="59.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Patient Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Text layoutX="33.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Appointment Information-">
+                                       <font>
+                                          <Font name="Microsoft JhengHei Light" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button layoutX="278.0" layoutY="25.0" mnemonicParsing="false" onAction="#cancelAppointment" prefHeight="26.0" prefWidth="115.0" text="Cancel" />
+                                    <Button layoutX="408.0" layoutY="25.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="115.0" text="Clear" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="View Appointments">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="346.0" layoutY="88.0" prefHeight="286.0" prefWidth="810.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox prefHeight="39.0" prefWidth="810.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox fx:id="appointment_type" onAction="#toggleSortBy" prefWidth="150.0" promptText="Appointment Type" />
+                                    <ComboBox fx:id="sort_by" prefWidth="150.0" promptText="Sort By" />
+                                    <Button mnemonicParsing="false" onAction="#printAppointmentsHandler" prefHeight="26.0" prefWidth="133.0" text="Print Appointments" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <TextArea fx:id="appointmentsDisplay" editable="false" prefHeight="306.0" prefWidth="810.0" promptText="Select 'Print Appointments'">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="View Billing Statement">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="376.0" prefWidth="810.4">
+                           <children>
+                              <HBox prefHeight="39.0" prefWidth="810.0" spacing="20.0">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#billingStatementHandler" prefHeight="26.0" prefWidth="155.0" text="Print Billing Statement" />
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="billingStatementDisplay" editable="false" prefHeight="306.0" prefWidth="810.0" promptText="Select 'Print Billing Statement'">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="View Expected Credit Amounts">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="376.0" prefWidth="810.4">
+                           <children>
+                              <HBox prefHeight="39.0" prefWidth="810.0" spacing="20.0">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#expectedCreditAmountsHandler" prefHeight="26.0" prefWidth="194.0" text="View Expected Credit Amounts" />
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="expectedCreditAmountsDisplay" editable="false" prefHeight="306.0" prefWidth="810.0" promptText="Select 'View Expected Credit Amounts'">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <TextArea fx:id="output" editable="false" prefHeight="146.0" prefWidth="810.0" promptText="Output" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin></TextArea>
+   </bottom>
+</BorderPane>
