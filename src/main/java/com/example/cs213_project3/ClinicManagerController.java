@@ -24,8 +24,25 @@ import javafx.fxml.FXML;
 //import javafx.scene.control.cell.PropertyValueFactory;
 //import javafx.event.ActionEvent;
 //import javafx.scene.control.RadioButton;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.ToggleGroup;
 
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.event.ActionEvent;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,7 +56,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * Controller class for the Clinic Manager application.
+ */
 public class ClinicManagerController {
 
     private List<Appointment> appointments; 
@@ -47,8 +66,6 @@ public class ClinicManagerController {
     private CircularLinkedList<Technician> technicians;
     private List<Patient> patients;
 
-    private static final int NUM_TOKENS_FOR_APPOINTMENT = 7;
-    private static final int NUM_TOKENS_FOR_CANCELATION = 6;
     private static final int FORMAT_THRESHOLD = 1000;
 
 
@@ -91,18 +108,16 @@ public class ClinicManagerController {
     @FXML
     private Tab schedule_tab, reschedule_tab, cancel_tab, appointments_tab, billing_tab, credits_tab;
 
+    
     /**
-     * This method will be performed automatically after the fxml is loaded.
-     * Write code to set the initial data for the GUI objects.
-     * Typically, set a list of objects from the backend to the frontend objects,
-     * such as ComboBox (dropdown), or ListView.
+     * Initializes the Clinic Manager application by setting up the 
+     * necessary UI components such as the lists of time slots, 
+     * imaging services, sorting options, and appointment types. It
+     * also initializes the data structures for storing appointments, 
+     * providers, technicians, and patients. Finally, it disables the
+     * sorting option until the user selects an appointment type.
      */
     public void initialize() {
-//        ObservableList<Location> locations =
-//                FXCollections.observableArrayList(Location.values());
-//        tbl_location.setItems(locations);
-//        col_zip.setCellValueFactory(new PropertyValueFactory<>("zip"));
-//        col_county.setCellValueFactory(new PropertyValueFactory<>("county"));
 
         this.appointments = new List<>();
         this.providers = new List<>();
@@ -135,6 +150,11 @@ public class ClinicManagerController {
         sort_by.setDisable(true);
     }
 
+    /**
+     * Clears all the fields on the UI to their initial state (empty string or null value). 
+     * This is used to clear the input fields after a user has submitted an appointment request, 
+     * changed an appointment request, or canceled an appointment request.
+     */
     @FXML
     protected void clear() {
         output.clear();
@@ -165,15 +185,33 @@ public class ClinicManagerController {
         imaging_service.setValue(null);
     }
 
+    /**
+     * Retrieves the scheduled date of birth from the UI component.
+     * 
+     * @return the scheduled date of birth as a string in the format "MM/dd/yyyy"
+     */
     protected String getSchedulingDob() {
         return scheduling_dob.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
 
+    /**
+     * Retrieves the scheduled date from the UI component.
+     * 
+     * @return the scheduled date as a string in the format "MM/dd/yyyy"
+     */
     protected String getSchedulingDate() {
         return scheduling_date.getValue().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
+    /**
+     * Toggles the selection of the office or imaging service based on the
+     * state of the office and imaging radio buttons. If the office radio
+     * button is selected, the imaging service combo box is disabled and
+     * the doctor list combo box is enabled. If the imaging service radio
+     * button is selected, the doctor list combo box is disabled and the
+     * imaging service combo box is enabled.
+     */
     @FXML
     protected void getAppointmentType() {
         if (selectOffice.isSelected()) {
@@ -187,6 +225,11 @@ public class ClinicManagerController {
         }
     }
 
+    /**
+     * Enables or disables the sorting options based on the selected appointment type.
+     * If "Only Office" or "Only Imaging" is selected, the sorting options are disabled.
+     * If "All Appointments" is selected, the sorting options are enabled.
+     */
     @FXML
     protected void toggleSortBy() {
         if (appointment_type.getValue().compareTo("Only Office")==0) {
@@ -198,6 +241,13 @@ public class ClinicManagerController {
         }
     }
 
+    /**
+     * Handles the print appointments button click event by printing the appointments based
+     * on the selected appointment type and sorting option. If the appointment type is "Only Office",
+     * it prints the office appointments. If the appointment type is "Only Imaging", it prints
+     * the imaging appointments. If the appointment type is "All Appointments", it prints the
+     * appointments sorted by appointment, location, or patient based on the selected sorting option.
+     */
     @FXML
     protected void printAppointmentsHandler() {
         if (appointment_type.getValue() == null) {
@@ -219,20 +269,33 @@ public class ClinicManagerController {
         }
     }
 
+    /**
+     * Handles the billing statement button click event by generating a billing
+     * statement for the billing cycle.
+     */
     @FXML
     protected void billingStatementHandler() {
         billingStatement();
     }
 
+    /**
+     * Handles the expected credit amounts button click event by displaying
+     * the expected credit amounts for all providers. The list is sorted by
+     * provider profile.
+     */
     @FXML
     protected void expectedCreditAmountsHandler() {
         displayExpectedCreditAmounts();
     }
 
+    
     /**
-     * Finds an appointment in the list that matches the given tokenized input.
+     * Finds an appointment in the list that matches the given tokenized input for cancelation.
+     * It compares the date, timeslot, first name, last name, and date of birth to find a match.
+     * If a matching appointment is found, it returns the appointment object.
+     * If no match is found, it returns null.
      * 
-     * @return the appointment object if found, null otherwise
+     * @return the matching Appointment object or null if no match is found
      */
     private Appointment findForCancelation(){
         Date appointmentDate = null;
@@ -277,6 +340,14 @@ public class ClinicManagerController {
         return null;
     }
 
+    /**
+     * Finds a patient in the list that matches the given profile.
+     * The comparison is done by comparing the profiles of the two persons.
+     * If the patient exists, it returns the patient.
+     * If the patient does not exist, it returns null.
+     * @param patientProfile the profile of the patient to search for
+     * @return the matching patient or null if no match is found
+     */
     private Patient findPatientForCancelation(Profile patientProfile) {
         Iterator<Patient> iterator = patients.iterator();
         Patient curr = null;
@@ -291,9 +362,14 @@ public class ClinicManagerController {
         return null;
     }
     
+    
     /**
-     * Cancels an appointment given the tokenized input.
-     * 
+     * Handles the cancel appointment button click event by canceling the appointment
+     * given the tokenized input for the appointment details. It validates the appointment
+     * date, timeslot, first name, last name, and date of birth. If the appointment exists in
+     * the list of appointments, it removes the appointment from the list and removes the
+     * corresponding visit from the patient's list of visits. If the appointment does not
+     * exist, it prints an error message.
      */
     @FXML
     private void cancelAppointment() {
@@ -335,9 +411,13 @@ public class ClinicManagerController {
     }
 
     
+    
     /**
-     * Finds an appointment given the tokenized input for rescheduling.
-     *
+     * Finds an appointment in the list that matches the given tokenized input for rescheduling.
+     * It compares the date, timeslot, first name, last name, and date of birth to find a match.
+     * If a matching appointment is found, it returns the appointment object.
+     * If no match is found, it returns null.
+     * 
      * @return the matching Appointment object or null if no match is found
      */
     public Appointment findForRescheduling() {
@@ -433,13 +513,17 @@ public class ClinicManagerController {
         output.appendText("\n");
     }
 
+    
     /**
-     * Checks if a provider is available for an appointment at a given time slot.
-     * This method is used to check if a provider is available for a given time slot before scheduling an appointment.
-     * It checks if the provider is scheduled for another appointment at the same time slot.
+     * Checks if a provider is available at a given time slot and date.
+     * This method is used to check if a provider is available for a given time slot and date before scheduling an appointment.
+     * It checks if the provider is scheduled for another appointment at the same time slot and date and with a different patient.
      * If the provider is scheduled, it returns false.
      * If the provider is available, it returns true.
-     * @param slot the time slot to check for availability
+     * @param patientProfile the profile of the patient to check for availability
+     * @param doctor the provider to check for availability
+     * @param date the date of the appointment
+     * @param slot the time slot of the appointment
      * @return true if the provider is available, false otherwise
      */
     private boolean providerIsAvailable(Profile patientProfile, Provider doctor, Date date, Timeslot slot) {
@@ -600,14 +684,13 @@ se     * @param slot the time slot of the appointment
     }
 
     
+    
     /**
-     * Reschedules an appointment given the tokenized input for the appointment details.
-     * It finds the appointment in the list by matching the date, timeslot, first name, last name, and date of birth.
-     * If the appointment exists, it checks if the new time slot is valid and if the appointment is not already
-     * scheduled at the same time.
-     * If the appointment is not already scheduled at the same time, it updates the time slot of the appointment
-     * in the list.
-     * If the appointment is already scheduled at the same time, it prints an error message.
+     * Handles the reschedule appointment button click event by rescheduling the appointment
+     * given the input for the appointment details. It validates the appointment
+     * date, timeslot, first name, last name, and date of birth. If the appointment exists in
+     * the list of appointments, it replaces the old appointment in the list with a new
+     * appointment with the same date and patient, but with the new time slot.
      * If the appointment does not exist, it prints an error message.
      */
     @FXML
@@ -686,13 +769,14 @@ se     * @param slot the time slot of the appointment
     } 
 
     
+    
     /**
      * Prints a list of all office appointments in the list, one per line.
      * Prints a message if the list is empty.
      * Display list of office appointments by county/date/time
      * For sorting, can just use the L key (sorts by county/date/time)
-     * then only display appointments of type office
-     */ 
+     * then only display appointments of type office (i.e. not imaging)
+     */
     private void displayOfficeAppointments() {
 
         if (appointments.size() > 0) { 
@@ -1045,10 +1129,16 @@ se     * @param slot the time slot of the appointment
     }
 
     
+    
     /**
-     * Creates an appointment object from the given tokenized input string.
+     * Creates an Appointment object based on the current scheduling form inputs.
+     * Validates the appointment date, time slot, and patient's date of birth.
+     * Checks for conflicting appointments and provider availability.
+     * If scheduling an office appointment, it verifies the doctor's availability.
+     * If scheduling an imaging appointment, it checks for the availability of the imaging service and assigns a technician.
+     * Prints appropriate error messages if validation fails or if resources are unavailable.
      * 
-     * @return the created Appointment object or null if the input is invalid
+     * @return the created Appointment object if all validations pass, or null if any validation fails or resources are unavailable.
      */
     private Appointment createAppointmentObject() {
         Date appointmentDate = null;
@@ -1160,6 +1250,16 @@ se     * @param slot the time slot of the appointment
         return null;
     }
 
+    /**
+     * Handles the schedule appointment button click event by scheduling an office or imaging
+     * appointment given the tokenized input for the appointment details. It validates the
+     * appointment date, timeslot, first name, last name, and date of birth. If the appointment
+     * type is office, it schedules an office appointment and adds the appointment to the
+     * patient's list of visits and to the provider's list of appointments. If the appointment
+     * type is imaging, it schedules an imaging appointment and adds the appointment to the
+     * patient's list of visits and to the provider's list of appointments. If the appointment
+     * is invalid, it prints an error message.
+     */
     @FXML
     public void scheduleAppointment() {
         if (fname_schedule.getText().trim().compareTo("") == 0) {
@@ -1200,14 +1300,15 @@ se     * @param slot the time slot of the appointment
 
     }
 
-    /**
-     * Schedules an office appointment given the tokenized input for the appointment details.
-     * It validates the appointment date, timeslot, first name, last name, and date of birth.
-     * It creates an appointment object and adds it to the list of appointments.
-     * It also adds the appointment to the patient's list of visits and to the provider's list of appointments.
-     * If the patient does not exist, it adds the patient to the list of patients.
-     * If the appointment is invalid, it prints an error message.
-     */
+    
+/**
+ * Schedules an office appointment based on the current form inputs.
+ * It creates an Appointment object and adds it to the list of appointments.
+ * If the patient does not already exist in the list of patients, it adds the patient.
+ * The patient's visit list is updated with the new appointment.
+ * The provider's appointment list is updated with the new timeslot.
+ * If the appointment is successfully scheduled, it prints a confirmation message.
+ */
     @FXML
     public void scheduleOfficeAppointment() {
 
@@ -1230,13 +1331,14 @@ se     * @param slot the time slot of the appointment
         }
     }
 
+    
     /**
-     * Schedules an imaging appointment given the tokenized input for the appointment details.
-     * It validates the appointment date, timeslot, first name, last name, and date of birth.
-     * It creates an imaging appointment object and adds it to the list of appointments.
-     * It also adds the appointment to the patient's list of visits and to the provider's list of appointments.
-     * If the patient does not exist, it adds the patient to the list of patients.
-     * If the appointment is invalid, it prints an error message.
+     * Schedules an imaging appointment based on the current form inputs.
+     * It creates an Appointment object and adds it to the list of appointments.
+     * If the patient does not already exist in the list of patients, it adds the patient.
+     * The patient's visit list is updated with the new appointment.
+     * The provider's appointment list is updated with the new timeslot.
+     * If the appointment is successfully scheduled, it prints a confirmation message.
      */
     public void scheduleImagingAppointment() {
         Appointment appointment = createAppointmentObject();
@@ -1258,27 +1360,6 @@ se     * @param slot the time slot of the appointment
             provider.addAppointment(appointment.getTimeslot());
             output.appendText(appointment.toString() + "[" + imaging_service.getValue().name() + "]" + " booked.\n");
         }
-    }
-
-    /**
-     * Checks if the given array of strings has the correct number of tokens for cancelation.
-     * The correct number of tokens is 6: date, timeslot, first name, last name, date of birth, and provider.
-     * @param tokenized an array of strings representing the appointment details
-     * @return true if the number of tokens is valid, false otherwise
-     */
-    public boolean validNumberOfTokensForCancelation(String[] tokenized) {
-
-        return tokenized.length == NUM_TOKENS_FOR_CANCELATION;
-    }
-
-    /**
-     * Checks if the given array of strings has the correct number of tokens for an appointment.
-     * The correct number of tokens is 6: date, timeslot, first name, last name, date of birth, provider.
-     * @param tokenized an array of strings representing the appointment details
-     * @return true if the number of tokens is valid, false otherwise
-     */
-    public boolean validNumberOfTokensForAppointment(String[] tokenized) {
-        return tokenized.length == NUM_TOKENS_FOR_APPOINTMENT;
     }
 
     /**
@@ -1321,26 +1402,38 @@ se     * @param slot the time slot of the appointment
 
     
     
+    
     /**
-     * Loads the providers from a file named "providers.txt" in the same package into the list.
-     * The file should have the format:
-     * D|T [first name] [last name] [date of birth] [location] [specialty|rate] [NPI]
-     * For example:
-     * D John Doe 1990-01-01 New York Cardiology 1234567890
-     * T Jane Doe 1990-01-01 New York 10
-     * The date of birth should be in the format "yyyy-mm-dd".
-     * The location should be one of the following: New York, New Jersey, Florida, California.
-     * The specialty should be one of the following: Cardiology, Neurology, Orthopedics, General Surgery.
-     * The rate should be an integer.
-     * The NPI should be a 10-digit string.
-     * If the file is not found, prints an error message.
-     * If the file is found, prints a success message and prints the list of providers and the circular linked list.
+     * Handles the load providers button click event by loading a list of providers
+     * from a file. It validates the file path, reads the file line by line, and
+     * creates Provider objects based on the input. Each provider is added to the
+     * list of providers and the list of doctors for display in the GUI.
+     * Prints appropriate error messages if the file is not found or if the file
+     * is invalid.
      */
     @FXML
     public void loadProviders() {
 
         try {
-            File file = new File(getClass().getResource("providers.txt").getFile());
+            FileChooser chooser = new FileChooser();
+            chooser.setTitle("Select a File");
+
+            Stage stage = (Stage) loadedProviders.getScene().getWindow();
+            String path;
+
+            // Show the open file dialog
+            File selectedFile = chooser.showOpenDialog(stage);
+
+            // Handle the result
+            if (selectedFile != null) {
+                path = selectedFile.getAbsolutePath();
+                output.appendText("File selected: " + path);
+            } else {
+                output.appendText("File selection cancelled.");
+                return;
+            }
+
+            File file = new File(path);
             Scanner scanner = new Scanner(file);
             ObservableList<Provider> provider_names = FXCollections.observableArrayList();
             
@@ -1397,88 +1490,6 @@ se     * @param slot the time slot of the appointment
 
         } catch (FileNotFoundException e) {
             output.appendText("File not found: " + e.getMessage()+"\n");
-        }
-    }
-
-    
-    /**
-     * The primary method for running the ClinicManager, which handles user input
-     * and commands to schedule, cancel, reschedule, and display appointments.
-     * 
-     * This method will loop and continue to prompt the user for input until the
-     * user enters the "Q" command.
-     */
-    public void run() {
-
-        loadProviders();
-
-        output.appendText("Clinic Manager is running...\n");
-
-        boolean run = true;
-        Scanner scanner = new Scanner(System.in);
-
-        while (run) {
-            String[] tokenized = scanner.nextLine().split("\\,");
-            if (tokenized[0].isEmpty()) continue;
-
-            switch(tokenized[0]) {
-                case "D":
-                    if (!validNumberOfTokensForAppointment(tokenized)) {
-                        output.appendText("Missing data tokens.");
-                        break;
-                    } 
-                    scheduleOfficeAppointment();
-                    break;
-                case "T":
-                    if (!validNumberOfTokensForAppointment(tokenized)) {
-                        output.appendText("Missing data tokens.");
-                        break;
-                    } 
-                    scheduleImagingAppointment();
-                    break;
-                case "C":
-                    if (!validNumberOfTokensForCancelation(tokenized)) {
-                        output.appendText("Missing data tokens.");
-                        break;
-                    }
-                    cancelAppointment();
-                    break;
-                case "R":
-                    if (!validNumberOfTokensForAppointment(tokenized)) {
-                        output.appendText("Missing data tokens.");
-                        break;
-                    } 
-                    rescheduleAppointment();
-                    break;
-                case "PA":
-                    printByAppointment();
-                    break;
-                case "PP":
-                    printByPatient();
-                    break;
-                case "PL":
-                    printByLocation();
-                    break;
-                case "PS":
-                    billingStatement();
-                    break;
-                case "Q":
-                    scanner.close();
-                    output.appendText("Clinic Manager terminated.");
-                    run = false;
-                    break;
-                case "PO":
-                    displayOfficeAppointments();
-                    break;
-                case "PI":
-                    displayImagingAppointments();
-                    break;
-                case "PC":
-                    displayExpectedCreditAmounts();
-                    break;
-                default:
-                    output.appendText("Invalid command!");
-            }
         }
     }
 }
