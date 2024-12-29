@@ -10,7 +10,7 @@ import com.example.cs213_project3.Patient;
 /**
  * A class for sorting lists of appointments, providers, and patients.
  * 
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Sort {
 

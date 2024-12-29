@@ -4,7 +4,7 @@ import com.example.cs213_project3.util.Profile;
 
 /**
  * Represents an appointment.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Appointment implements Comparable <Appointment> {
     protected Date date;

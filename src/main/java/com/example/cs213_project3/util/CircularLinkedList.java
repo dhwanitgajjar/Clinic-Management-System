@@ -6,7 +6,7 @@ import java.util.Iterator;
 /**
  * Implements a circular linked list.
  *
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class CircularLinkedList<E> implements Iterable<E> {
 

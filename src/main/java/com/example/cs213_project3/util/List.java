@@ -4,7 +4,7 @@ import java.util.Iterator;
 /**
  * An abstract class for implementing lists.
  * 
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class List<E> implements Iterable<E> {
 	

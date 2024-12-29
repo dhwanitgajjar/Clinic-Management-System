@@ -4,7 +4,7 @@ import com.example.cs213_project3.util.Visit;
 
 /**
  * This class represents a patient.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Patient extends Person{
 

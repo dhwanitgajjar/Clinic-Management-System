@@ -2,7 +2,7 @@ package com.example.cs213_project3;
 
 /**
  * Represents a time slot with an hour and minute.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Timeslot implements Comparable<Timeslot> {
     private int hour;

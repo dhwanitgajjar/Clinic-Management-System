@@ -5,7 +5,7 @@ import java.util.Calendar;
  * Represents a calendar date with day, month, and year attributes.
  * Implements the Comparable interface to allow comparison of Date objects.
  * Provides utility methods to validate dates, handle leap years, and compare dates.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Date implements Comparable<Date> {
 

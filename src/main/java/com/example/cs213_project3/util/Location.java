@@ -3,7 +3,7 @@ package com.example.cs213_project3.util;
 /**
  * Enum representing various locations with associated ZIP codes and counties.
  * Each location has a ZIP code and a county name associated with it.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public enum Location {
     

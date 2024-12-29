@@ -5,7 +5,7 @@ import com.example.cs213_project3.util.List;
 
 /**
  * Class for technicians
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Technician extends Provider {
 

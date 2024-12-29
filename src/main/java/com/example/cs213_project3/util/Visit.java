@@ -6,7 +6,7 @@ import com.example.cs213_project3.Appointment;;
  * in a singly linked list structure. Each Visit object holds a reference to an appointment
  * and the next visit in the list.
  * 
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Visit {
 	private Appointment appointment; 

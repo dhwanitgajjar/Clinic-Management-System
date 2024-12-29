@@ -3,7 +3,7 @@ package com.example.cs213_project3.util;
 /**
  * Represents a profile containing a patient's first name, last name, and date of birth.
  * Implements the Comparable interface to allow comparison between profiles.
- * @author Harb Chauhan
+ * @author Dhwanit Gajjar
  */
 public class Profile implements Comparable<Profile> {
     private String fname;
